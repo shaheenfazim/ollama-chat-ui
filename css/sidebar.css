@@ -1,0 +1,383 @@
+/* CSS Variables */
+:root {
+  --sidebar-transition: 0.3s ease;
+  --item-padding: 0.75rem;
+  --item-border-radius: 2rem;
+  --icon-size: 24px;
+  --item-gap: 15px;
+  --mobile-toggle-size: 40px;
+  --header-height: 50px;
+  --common-spacing: 1rem;
+  --collapsed-sidebar-width: 80px;
+  --sidebar-width: 250px;
+  --font-size-base: 1rem;
+  --font-size-sm: 0.875rem;
+}
+
+/* Base Sidebar Styles */
+.sidebars-container {
+  position: relative;
+  z-index: 1000;
+}
+
+.sidebar,
+.right-sidebar {
+  position: fixed;
+  top: 0;
+  width: var(--collapsed-sidebar-width);
+  height: 100vh;
+  background-color: var(--primary-color);
+  padding: var(--common-spacing) var(--item-padding);
+  transition: width var(--sidebar-transition);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar {
+  left: 0;
+  border-right: 1px solid var(--border-color);
+}
+
+.right-sidebar {
+  right: 0;
+  border-left: 1px solid var(--border-color);
+}
+
+.sidebar.open,
+.right-sidebar.open {
+  width: var(--sidebar-width);
+}
+
+/* Header Styles */
+.sidebar-header {
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  margin-bottom: var(--item-padding);
+}
+
+.header-icon {
+  position: absolute;
+  left: var(--item-padding);
+  font-size: var(--icon-size);
+  color: var(--text-color);
+  cursor: pointer;
+  padding: var(--item-padding);
+  border-radius: var(--item-border-radius);
+  transition: background-color var(--sidebar-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* Add this new rule for right sidebar header icon */
+.right-sidebar .header-icon {
+  left: auto;
+  right: var(--item-padding);
+}
+
+.header-icon:hover {
+  background-color: var(--secondary-hover-color);
+}
+
+/* Search Bar */
+.search-container {
+  position: sticky;
+  top: 0;
+  margin-bottom: 0.5rem;
+  height: calc(var(--icon-size) + 2 * var(--item-padding));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input-wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-input {
+  display: none;
+  width: 100%;
+  background: var(--secondary-color);
+  border: none;
+  border-radius: var(--item-border-radius);
+  padding: var(--item-padding);
+  padding-left: 1rem;
+  color: var(--text-color);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+}
+
+.sidebar.open .search-input {
+  display: block;
+}
+
+.search-input:focus {
+  background: var(--secondary-hover-color);
+  outline: none;
+}
+
+.search-plus-icon {
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: var(--item-border-radius);
+  padding: var(--item-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-plus-icon:hover {
+  background-color: var(--secondary-color);
+}
+
+.sidebar.open .search-plus-icon {
+  position: absolute;
+  right: 0;
+}
+
+/* Section Styles */
+.sidebar-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Footer Styles */
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: var(--common-spacing);
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: var(--item-gap);
+  padding: var(--item-padding);
+  cursor: pointer;
+  border-radius: var(--item-border-radius);
+  color: var(--text-color);
+  width: 100%;
+}
+
+.footer-item:hover {
+  background-color: var(--secondary-color);
+}
+
+#settings-button.active {
+  background-color: var(--secondary-color);
+}
+
+.footer-icon {
+  min-width: var(--icon-size);
+  width: var(--icon-size);
+  height: var(--icon-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-text {
+  display: none;
+  font-size: var(--font-size-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar.open .footer-text,
+.right-sidebar.open .footer-text {
+  display: block;
+}
+
+/* Chat List Styles */
+.recent-history {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+}
+
+.recent-history::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: var(--item-padding);
+  margin: 0.25rem 0;
+  border-radius: var(--item-border-radius);
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background-color 0.2s ease;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  min-height: calc(24px + 2 * var(--item-padding));
+}
+
+.chat-item:hover {
+  background-color: var(--secondary-color);
+}
+
+.chat-item.active {
+  background-color: var(--secondary-color);
+}
+
+.chat-item-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: var(--item-gap);
+  position: relative;
+  z-index: 1;
+}
+
+.chat-icon {
+  min-width: var(--icon-size);
+  width: var(--icon-size);
+  height: var(--icon-size);
+  font-size: 1.25rem;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-title {
+  display: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar.open .chat-title {
+  display: block;
+}
+
+.chat-title-input {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0;
+  margin: 0;
+  width: calc(100% - 40px);
+  outline: none;
+}
+
+.delete-chat-icon {
+  display: none;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: opacity 0.2s ease;
+}
+
+.sidebar.open .chat-item:hover .delete-chat-icon {
+  display: inline-block;
+  opacity: 0.7;
+}
+
+.sidebar.open .chat-item:hover .delete-chat-icon:hover {
+  opacity: 1;
+}
+
+/* Hide right sidebar content when collapsed */
+.right-sidebar:not(.open) .settings-view,
+.right-sidebar:not(.open) .settings-content,
+.right-sidebar:not(.open) .options-section {
+  display: none !important;
+}
+
+/* Show settings view by default when sidebar is open */
+.right-sidebar.open .settings-view {
+  display: block;
+}
+
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
+  /* Mobile Toggle */
+  .mobile-toggle {
+    display: flex;
+    position: fixed;
+    top: var(--common-spacing);
+    width: var(--mobile-toggle-size);
+    height: var(--mobile-toggle-size);
+    cursor: pointer;
+    color: var(--text-color);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-toggle.left {
+    left: var(--common-spacing);
+  }
+
+  .mobile-toggle.right {
+    right: var(--common-spacing);
+  }
+
+
+  /* Hide opposite mobile toggles when any sidebar is open */
+  .sidebars-container:has(.sidebar.open) .mobile-toggle,
+  .sidebars-container:has(.right-sidebar.open) .mobile-toggle {
+    display: none;
+  }
+
+  .sidebar,
+  .right-sidebar {
+    display: none;
+  }
+
+
+  .sidebar.open,
+  .right-sidebar.open {
+    display: flex;
+  }
+
+}
+
+/* Theme toggle animations */
+.footer-icon svg {
+  fill: var(--text-color);
+  width: 22px;
+}
+
+#sun-eye {
+  cursor: pointer;
+  transition: transform 500ms ease-out;
+}
+
+#sun-eye.move-right {
+  transform: translateX(-15%);
+}
+
+#sun-ray {
+  transition: transform 750ms cubic-bezier(0.11, 0.14, 0.29, 1.32);
+  transform-origin: center;
+}
+
+#sun-ray.rotate {
+  transform: rotate(0.5turn);
+}

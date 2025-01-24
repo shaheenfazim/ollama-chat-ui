@@ -1,0 +1,254 @@
+/* Typing Area */
+.typing-area {
+  position: fixed;
+  bottom: 0;
+  left: var(--collapsed-sidebar-width);
+  right: var(--collapsed-sidebar-width);
+  z-index: 100;
+  padding: 0 0.75rem;
+  transition: left var(--sidebar-transition), right var(--sidebar-transition);
+}
+
+.main-content.sidebar-open .typing-area {
+  left: var(--sidebar-width);
+}
+
+.main-content.right-sidebar-open .typing-area {
+  right: var(--sidebar-width);
+}
+
+/* Input Container */
+.input-wrapper {
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--secondary-color);
+  border-radius: 1.5rem 1.5rem 0 0;
+  overflow: visible;
+}
+
+.input-wrapper.drag-over {
+  border: 2px dashed var(--accent-color);
+  background: var(--glass-color);
+  transition: all 0.2s;
+}
+
+/* Input Sections */
+.input-top {
+  position: relative;
+  min-height: 24px;
+  padding: 1rem 1.5rem 0rem;
+}
+
+.input-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  height: 50px;
+}
+
+.input-bottom .material-symbols-rounded {
+  font-size: 24px;
+  color: var(--text-color);
+  line-height: 3;
+  cursor: pointer;
+}
+
+/* Input Groups */
+.input-left,
+.input-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+}
+
+/* Model Select */
+.select-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  font-size: 18px !important;
+  color: var(--text-color);
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.prompt-model-select {
+  min-width: 160px;
+  width: auto;
+  height: 32px;
+  padding: 0 32px 0 12px;
+  border: none;
+  border-radius: 1rem;
+  background: var(--secondary-hover-color);
+  color: var(--text-color);
+  font-size: var(--font-size-base);
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  display: flex;
+  align-items: center;
+}
+
+.prompt-model-select option {
+  padding: 0 32px 0 12px;
+  min-width: 100%;
+  height: 32px;
+  background: var(--secondary-color);
+}
+
+/* Typing Input */
+.typing-input {
+  width: 100%;
+  min-height: 24px;
+  max-height: 200px;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-color);
+  font: inherit;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  scrollbar-width: none;
+  position: relative;
+}
+
+.typing-input::-webkit-scrollbar {
+  display: none;
+}
+
+/* Placeholder Styles */
+[contenteditable=true] {
+  position: relative;
+}
+
+[contenteditable=true]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.5;
+}
+
+/* Add new styles for command suggestions */
+[contenteditable=true]:not(:empty):before {
+  content: attr(placeholder);
+  color: var(--text-color);
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+[contenteditable=true]:not(:empty)[placeholder^="/"]:before {
+  opacity: 0.5;
+}
+
+
+/* Image Preview */
+#image-preview-container {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  padding: 8px 16px;
+  margin-bottom: 4px;
+  z-index: 10;
+}
+
+.preview-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.preview-content {
+  position: relative;
+  flex: 0 0 auto;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--secondary-color);
+}
+
+.preview-content img {
+  height: 100%;
+  width: auto;
+}
+
+/* Image Indicator */
+.image-indicator {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-color);
+  font-size: 24px;
+  z-index: 2;
+  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.image-indicator + .typing-input {
+  padding-left: 32px;
+  transition: padding 0.2s;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.3);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .typing-area,
+  .main-content.sidebar-open .typing-area,
+  .main-content.right-sidebar-open .typing-area {
+    left: 0 !important;
+    right: 0 !important;
+    padding: 0 0.5rem;
+  }
+
+  .input-wrapper {
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .input-bottom {
+    padding: 8px 12px;
+  }
+
+  .prompt-model-select {
+    min-width: 120px;
+  }
+}

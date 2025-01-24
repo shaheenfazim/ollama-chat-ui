@@ -1,0 +1,227 @@
+/* Chat Container */
+#chat-container {
+  position: relative;
+  flex: 1;
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  display: none;
+}
+
+#chat-container::-webkit-scrollbar {
+  display: none;
+}
+
+#chat-container.active {
+  display: block;
+}
+
+#scroll-wrapper {
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 5vh 0 15vh;
+  position: relative;
+  min-height: calc(100vh - var(--button-height) - 4rem);
+}
+
+#chat-history {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 1rem 0 calc(var(--button-height) + 3rem);
+}
+
+/* Messages */
+.system-message,
+.user-message {
+  max-width: 85%;
+  margin: 0.75rem 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-content {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.user-message {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.system-message {
+  align-self: flex-start;
+}
+
+.user-message .message-content {
+  background: var(--secondary-color);
+  border-radius: 1.5rem 0.25rem 1.5rem 1.5rem;
+}
+
+.system-message .message-content {
+  background: var(--primary-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem 1.5rem 1.5rem 1.5rem;
+}
+
+/* Action Buttons */
+.edit-tag,
+.copy-tag {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  opacity: 0;
+  width: var(--button-height);
+  height: var(--button-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-message .edit-tag {
+  right: calc(100% + 1rem);
+}
+
+.system-message .copy-tag {
+  left: calc(100% + 1rem);
+}
+
+.user-message:hover .edit-tag,
+.system-message:hover .copy-tag {
+  opacity: 1;
+}
+
+.edit-tag:hover,
+.copy-tag:hover {
+  opacity: 1;
+  background: var(--secondary-hover-color);
+}
+
+.editing .edit-tag{
+  display: none;
+}
+
+.editing .message-text{
+  outline: none;
+}
+
+/* Images and Attachments */
+.message-attach {
+  display: none;
+}
+
+.message-attach:not(:empty) {
+  display: flex;
+  padding-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.message-attach img,
+.message-attach canvas {
+  max-height: 20vh;
+  width: auto;
+  border-radius: 8px;
+}
+
+.image-wrapper {
+  height: 120px;
+  width: auto;
+  min-width: 120px;
+  max-width: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--secondary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-wrapper canvas {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+/* File Preview */
+.file-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary-hover-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  width: 120px;
+  height: 120px;
+  padding: 0.5rem;
+}
+
+.file-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.file-icon .material-symbols-rounded {
+  font-size: 3.5rem;
+}
+
+.file-name {
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 0 0.5rem;
+}
+
+/* Preview Close Button */
+.remove-preview {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.remove-preview:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.remove-preview .material-symbols-rounded {
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  #chat-container {
+    margin: 0;
+  }
+}

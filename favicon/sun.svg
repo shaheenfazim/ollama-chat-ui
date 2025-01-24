@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 450">
+  <style>
+    #sun-eye {
+      cursor: pointer;
+      transition: transform 500ms ease-out;
+    }
+    #sun-eye.move-right {
+      transform: translateX(-15%);
+    }
+    #sun-ray {
+      transition: transform 750ms cubic-bezier(0.11, 0.14, 0.29, 1.32);
+      transform-origin: center;
+    }
+    #sun-ray.rotate {
+      transform: rotate(0.5turn);
+    }
+  </style>
+  <script type="text/javascript">
+    <![CDATA[
+      function toggleMove(evt) {
+        document.getElementById('sun-eye').classList.toggle('move-right');
+        document.getElementById('sun-ray').classList.toggle('rotate');
+      }
+    ]]>
+  </script>
+  <g id="sun-ray" onclick="toggleMove(evt)">
+     <path d="M225,450a29.451,29.451,0,0,1-20.892-8.653L155.952,393.19H87.684a29.975,29.975,0,0,1-30-30V294.923L8.654,245.892a29.52,29.52,0,0,1,0-41.783l49.031-49.031V87.685a29.975,29.975,0,0,1,30-30h67.394L204.109,8.654a29.52,29.52,0,0,1,41.783,0l49.031,49.031H363.19a29.975,29.975,0,0,1,30,30v68.267l48.157,48.157a29.521,29.521,0,0,1,0,41.783L393.19,294.049V363.19a29.975,29.975,0,0,1-30,30H294.049l-48.157,48.157A29.45,29.45,0,0,1,225,450Zm0-340A115,115,0,1,0,340,225,115.13,115.13,0,0,0,225,110Z"/>
+  </g>
+  <g id="sun-eye" onclick="toggleMove(evt)">
+    <circle cx="87.5" cy="87.5" r="87.5" transform="translate(138 138)"/>
+  </g>
+</svg>
+
+
+
