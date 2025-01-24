@@ -47,6 +47,7 @@ A web interface for Ollama, providing a user-friendly way to interact with local
      ```bash
      ollama serve
      ```
-----
+**Visit your local server (`http://localhost:8080`) or hosted site (e.g., `https://ollama-x.web.app`) in your browser and select a model to start the chat.**
 
-Visit your local server (`http://localhost:8080`) or hosted site (e.g., `https://ollama-x.web.app`) in your browser and select a model to start the chat.
+----
+<img width="1280" alt="image" src="https://github.com/user-attachments/assets/c9bebf5a-a845-4610-abf4-926e1f44d2c9" />
